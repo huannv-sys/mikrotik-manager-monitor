@@ -1,0 +1,21 @@
+frontend-tests:
+  runs-on: ubuntu-latest
+  needs: security-scan
+  steps:
+  - name: Checkout code
+    uses: actions/checkout@v4
+
+  - name: Set up Node.js
+    uses: actions/setup-node@v3
+    with:
+      node-version: '16'
+
+  - name: Install dependencies
+    run: |
+      cd web/frontend
+      npm install
+
+  - name: Run frontend tests
+    run: |
+      cd web/frontend
+      npm test
