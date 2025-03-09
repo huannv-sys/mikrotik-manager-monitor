@@ -13,6 +13,6 @@ class MikroTikService:
                 ssl=True
             )
             interfaces = conn(cmd='/interface/print')
-            return [iface for iface in interfaces]
+            return list(interfaces)
         except Exception as e:
             raise RuntimeError(f"MikroTik API Error: {e}")
