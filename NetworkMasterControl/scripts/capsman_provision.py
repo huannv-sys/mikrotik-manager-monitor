@@ -25,10 +25,10 @@ def register_capsman_ap(controller_ip: str, ap_ip: str):
             enabled='yes',
             name=ap_ip
         )
-        
+
         logger.info(f"Đăng ký thành công AP {ap_ip} vào CAPsMAN")
         return True
-        
+
     except Exception as e:
         logger.error(f"Lỗi đăng ký AP {ap_ip}: {str(e)}")
         return False

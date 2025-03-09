@@ -7,7 +7,7 @@ engine = create_engine(config['database']['url'])
 
 class Device(Base):
     __tablename__ = 'devices'
-    
+
     id = Column(Integer, primary_key=True)
     ip = Column(String(15), unique=True)
     model = Column(String(50))
@@ -16,7 +16,7 @@ class Device(Base):
 
 class User(Base):
     __tablename__ = 'users'
-    
+
     id = Column(Integer, primary_key=True)
     username = Column(String(50), unique=True)
     hashed_password = Column(String(100))
