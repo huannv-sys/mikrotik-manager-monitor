@@ -22,29 +22,29 @@ def mikrotik_backup(device_ip: str, user: str, password: str):
 
         # Tạo tên file backup
         backup_name = f"backup_{device_ip}_{datetime.now().strftime('%Y%m%d_%H%M')}"
-        
+
         # Tạo backup
         api.get_binary_resource('/').call(
             'system/backup/save',
             {'name': backup_name}
         )
-        
+
         # Tải file backup về
         backup_file = api.get_binary_resource('/').call(
             'file/get',
             {'name': f'{backup_name}.backup'}
         )[0]['contents']
-        
+
         # Lưu vào thư mục backups
         backup_dir = config['backup']['directory']
         os.makedirs(backup_dir, exist_ok=True)
-        
+
         with open(f"{backup_dir}/{backup_name}.backup", 'wb') as f:
             f.write(backup_file)
-        
+
         logger.info(f"Backup thành công cho {device_ip}")
         return True
-        
+
     except Exception as e:
         logger.error(f"Backup thất bại {device_ip}: {str(e)}")
         return False
